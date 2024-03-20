@@ -35,7 +35,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -47,78 +54,50 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val painter = painterResource(id = R.drawable.kenya)
-            val description="I love Kenya"
-            val title= "KENYA"
-
             Box(modifier = Modifier
-                .fillMaxSize(0.5f)
-                .padding(16.dp)
-            )
-            {
-                ImageCArd(
-                    painter = painter,
-                    contentDescription = description,
-                    title =title
-                )
+                .fillMaxSize()
+                .background(Color(0XFF101010))
+            ){
+                Text(
+                    text = buildAnnotatedString {
+                                                withStyle(
+                                                    style = SpanStyle(
+                                                       color=Color.Green,
+                                                        fontSize = 50.sp,
+                                                        fontWeight = FontWeight.Bold
+                                                    )
+                                                ){
+                                                    append("D")
+                                                }
+                                                  append("ennis")
+                        withStyle(
+                            style = SpanStyle(
+                                color=Color.Green,
+                                fontSize = 50.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        ){
+                            append("M")
+                        }
+                        append("asiror")
+
+
+                    },
+                    color= Color.White,
+                    fontSize=30.sp,
+                    fontWeight= FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    textAlign = TextAlign.Center,
+                    textDecoration=TextDecoration.Underline
+
+
+
+                    )
+
             }
 
-
-
-
         }
     }
 }
 
-@Composable
-fun ImageCArd(
-    painter: Painter,
-    contentDescription: String,
-    title:String,
-    modifier: Modifier =Modifier
-    ) {
-    Card (
-        modifier =modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(15.dp)
-
-    ){
-    Box(modifier = Modifier
-        .height(200.dp)
-    ){
-        Image(
-            painter = painter,
-            contentDescription =contentDescription,
-            contentScale = ContentScale.Crop
-            )
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors=listOf(
-                        Color.Transparent,
-                        Color.Black
-
-                    ),
-                    startY = 300f
-                )
-
-            )
-        )
-        {
-
-        }
-        
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(12.dp),
-            contentAlignment = Alignment.BottomStart
-        ){
-         Text(title, style = TextStyle(color=Color.White, fontSize = 16.sp) )
-        }
-    }
-    }
-
-
-
-}
 
